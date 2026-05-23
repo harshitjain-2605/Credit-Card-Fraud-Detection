@@ -2,24 +2,24 @@
 
 ## 📌 Overview
 
-Developed an end-to-end Machine Learning solution for detecting fraudulent credit card transactions using transaction-level financial data. The objective was to identify potentially fraudulent transactions with high recall while minimizing false positives, helping financial institutions reduce financial losses and improve customer trust.
+Developed an end-to-end machine learning fraud detection system using Python, SQL, Scikit-Learn, XGBoost, and SMOTE to identify fraudulent credit card transactions from a dataset containing 284,807 financial transactions.
 
-The project combines data analytics, SQL-based business analysis, feature engineering, class imbalance handling, and machine learning to build a scalable fraud detection system.
+The project combines exploratory data analysis, SQL-based business analysis, feature engineering, class imbalance handling, predictive modeling, and fraud-risk analytics to support data-driven fraud prevention and customer protection initiatives.
 
 ---
 
 ## 🎯 Business Problem
 
-Financial institutions process millions of transactions daily. Fraudulent transactions can result in substantial financial losses and negatively impact customer experience.
+Financial institutions process millions of transactions every day. Fraudulent transactions can result in significant financial losses, operational inefficiencies, and reduced customer trust.
 
 Key challenges include:
 
 - Extremely imbalanced transaction data
 - High cost of missed fraud cases
-- Need for accurate risk identification
-- Maintaining customer trust while reducing unnecessary fraud alerts
+- Need for scalable fraud detection systems
+- Minimizing false alerts while maximizing fraud identification
 
-The goal was to develop a predictive model capable of identifying high-risk transactions before financial damage occurs.
+The objective of this project was to build a machine learning solution capable of accurately identifying high-risk transactions before financial damage occurs.
 
 ---
 
@@ -37,7 +37,7 @@ The goal was to develop a predictive model capable of identifying high-risk tran
 | Fraud Rate | 0.172% |
 | Features | 30 |
 
-Target Variable:
+### Target Variable
 
 | Class | Description |
 |---------|---------|
@@ -48,7 +48,7 @@ Target Variable:
 
 ## 🛠 Technologies Used
 
-### Programming
+### Programming Languages
 
 - Python
 - SQL
@@ -76,12 +76,13 @@ Target Variable:
 
 Performed comprehensive exploratory analysis to understand transaction behavior and fraud patterns.
 
-Key observations:
+### Key Findings
 
-- Fraudulent transactions represented less than 0.2% of all transactions.
-- Transaction amounts showed significant variation between legitimate and fraudulent activities.
-- Severe class imbalance required specialized handling techniques.
-- Time-based transaction patterns revealed useful behavioral insights.
+- Dataset contained 284,807 transactions and 492 fraudulent transactions.
+- Fraudulent transactions represented only 0.17% of all records, making this a highly imbalanced classification problem.
+- No missing values were present, ensuring high-quality input data.
+- Significant behavioral differences existed between legitimate and fraudulent transactions.
+- Severe class imbalance required specialized techniques for effective fraud detection.
 
 ### Fraud Distribution
 
@@ -89,9 +90,9 @@ Key observations:
 
 ---
 
-## 🗄 SQL-Based Analysis
+## 🗄 SQL-Based Business Analysis
 
-SQL was used to perform business-oriented transaction analysis and identify fraud-related trends.
+SQL was used to perform transaction-level business analysis and identify fraud-related trends.
 
 Example analyses included:
 
@@ -100,7 +101,7 @@ Example analyses included:
 - High-value fraud transaction identification
 - Transaction pattern exploration
 
-Example query:
+Example Query:
 
 ```sql
 SELECT AVG(Amount)
@@ -112,56 +113,80 @@ WHERE Class = 1;
 
 ## ⚙ Methodology
 
-The project followed a structured machine learning workflow:
+### 1. Data Validation & Quality Checks
 
-### Data Preparation
+- Verified dataset integrity
+- Checked for missing values
+- Performed exploratory statistical analysis
 
-- Data validation and quality checks
-- Missing value verification
-- Transaction feature analysis
+### 2. Feature Engineering
 
-### Feature Engineering
-
-Created additional features including:
+Created additional features to improve predictive performance:
 
 - Log-transformed transaction amount
 - Transaction hour extraction
 - Behavioral transaction indicators
 
-### Class Imbalance Handling
+### 3. Handling Class Imbalance
 
-Implemented SMOTE (Synthetic Minority Oversampling Technique) to balance minority fraud samples and improve fraud detection capability.
+Implemented SMOTE (Synthetic Minority Oversampling Technique) to address severe class imbalance and improve minority-class detection.
 
-### Model Development
+### 4. Model Development
 
-Developed and evaluated:
+Developed and evaluated multiple machine learning models:
 
 - Logistic Regression
 - Random Forest
 - XGBoost
 
-### Model Evaluation
+### 5. Model Evaluation
 
-Performance was assessed using:
+Models were assessed using:
 
 - Precision
 - Recall
 - F1 Score
 - ROC-AUC
+- Confusion Matrix
 
-Special emphasis was placed on Recall because undetected fraudulent transactions represent the highest business risk.
+Special emphasis was placed on **Recall**, as undetected fraudulent transactions represent the highest business risk.
 
 ---
 
 ## 📈 Results
 
-| Model | Accuracy | Precision | Recall | F1 Score |
-|---------|---------|---------|---------|---------|
-| Logistic Regression | XX | XX | XX | XX |
-| Random Forest | XX | XX | XX | XX |
-| XGBoost | XX | XX | XX | XX |
+| Model | Accuracy | Precision | Recall | F1 Score | ROC-AUC |
+|---------|---------|---------|---------|---------|---------|
+| Logistic Regression | 97.43% | 5.81% | 91.84% | 10.94% | 97.22% |
+| Random Forest | 99.95% | 87.10% | 82.65% | 84.82% | 98.12% |
+| XGBoost | 99.85% | 54.84% | 86.73% | 67.19% | 97.89% |
 
-*(Replace with actual project results.)*
+### Performance Analysis
+
+- Logistic Regression achieved the highest Recall (91.84%) but generated excessive false positives.
+- Random Forest delivered the strongest balance between Precision and Recall.
+- XGBoost achieved competitive performance but lower precision than Random Forest.
+- Random Forest was selected as the final production model due to its superior overall fraud-detection capability.
+
+---
+
+## 🏆 Key Results
+
+- Processed and analyzed **284,807 financial transactions**.
+- Detected fraud within a dataset containing only **0.17% fraudulent records**.
+- Applied **SMOTE** to improve minority-class identification.
+- Evaluated Logistic Regression, Random Forest, and XGBoost models.
+- Achieved:
+  - **99.95% Accuracy**
+  - **87.10% Precision**
+  - **82.65% Recall**
+  - **84.82% F1 Score**
+  - **98.12% ROC-AUC**
+- Selected Random Forest as the final model due to its strong balance between fraud detection effectiveness and false-positive control.
+
+---
+
+## 📊 Model Visualizations
 
 ### Confusion Matrix
 
@@ -179,42 +204,46 @@ Special emphasis was placed on Recall because undetected fraudulent transactions
 
 ## 💡 Business Impact
 
-This solution demonstrates how machine learning can support fraud prevention strategies in financial institutions by:
+This solution demonstrates how machine learning can support fraud prevention initiatives in financial institutions by:
 
 - Improving identification of potentially fraudulent transactions
 - Reducing financial risk exposure
 - Supporting data-driven decision making
-- Enhancing customer protection initiatives
-- Enabling scalable transaction monitoring
+- Enhancing customer protection strategies
+- Enabling scalable transaction monitoring systems
+
+The final model provides strong predictive performance while maintaining practical business usability for fraud investigation workflows.
 
 ---
 
 ## 🚀 Interactive Dashboard
 
-An interactive Streamlit application was developed to enable real-time fraud risk assessment and transaction analytics visualization.
+An interactive Streamlit application was developed to enable real-time fraud risk assessment and transaction analytics.
 
-Features include:
+### Features
 
-- Transaction risk prediction
-- Fraud probability estimation
+- Fraud probability prediction
+- Transaction risk classification
 - Interactive analytics dashboard
-- Real-time user inputs
+- Real-time user input support
+- Model-based fraud scoring
 
-Live Demo:
+### Live Demo
 
-[Add Streamlit Deployment Link]
+🔗 Add your deployed Streamlit link here
 
 ---
 
 ## 🔮 Future Enhancements
 
-Potential future improvements include:
+Potential improvements include:
 
-- Real-time transaction streaming
+- Real-time transaction streaming pipelines
 - Explainable AI using SHAP values
 - Deep learning-based fraud detection
 - Automated fraud alert generation
-- Cloud-native deployment architecture
+- Cloud deployment on AWS/Azure/GCP
+- Transaction anomaly detection systems
 
 ---
 
@@ -225,6 +254,23 @@ Potential future improvements include:
 Computer Engineering Student  
 Thapar Institute of Engineering & Technology
 
-LinkedIn: [Your LinkedIn Profile]
+LinkedIn: https://linkedin.com/in/your-profile
 
-GitHub: [Your GitHub Profile]
+GitHub: https://github.com/harshitjain-2605
+
+---
+
+## ⭐ Skills Demonstrated
+
+- Machine Learning
+- Fraud Detection
+- Data Analytics
+- SQL Analysis
+- Data Quality Management
+- Feature Engineering
+- Risk Analytics
+- Model Evaluation
+- Data Visualization
+- Business Problem Solving
+- Predictive Modeling
+- End-to-End Data Science Workflow
